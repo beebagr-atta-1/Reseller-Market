@@ -3,83 +3,780 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Download Reseller Market – Android App</title>
-  <meta name="description" content="Download the Reseller Market Android app. Browse products, share with customers and grow your reselling business from your phone." />
+
+  <meta
+    name="description"
+    content="Download the Reseller Market Android app. Browse products, share with customers and grow your reselling business from your phone."
+  />
+
   <meta name="theme-color" content="#0f766e" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --brand: #0f766e;
+      --brand-dark: #115e59;
+      --accent: #f59e0b;
+      --ink: #0f172a;
+      --muted: #475569;
+      --bg: #f8faf9;
+      --card: #ffffff;
+      --line: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .narrow {
+      max-width: 720px;
+    }
+
+    /* Navigation */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(248, 250, 249, 0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand), #14b8a6);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .logo.sm {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      font-size: 0.65rem;
+    }
+
+    /* Buttons */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 10px 18px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--brand-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      font-size: 0.9rem;
+      padding: 8px 14px;
+    }
+
+    .btn-lg {
+      font-size: 1.15rem;
+      padding: 16px 30px;
+      box-shadow: 0 10px 30px -10px rgba(15, 118, 110, 0.6);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 64px 0 48px;
+      background: radial-gradient(
+        ellipse at top right,
+        #ccfbf1 0%,
+        transparent 60%
+      );
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--brand);
+    }
+
+    .lead {
+      margin: 20px 0 32px;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 540px;
+    }
+
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .note {
+      margin-top: 16px;
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+    }
+
+    /* Phone */
+
+    .phone {
+      justify-self: center;
+      width: 280px;
+      height: 560px;
+      background: #0f172a;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: 0 40px 80px -30px rgba(15, 23, 42, 0.5);
+      transform: rotate(3deg);
+    }
+
+    .screen {
+      background: #f1f5f9;
+      height: 100%;
+      border-radius: 30px;
+      padding: 18px 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .s-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+
+    .s-earn {
+      background: linear-gradient(135deg, var(--brand), #14b8a6);
+      color: #fff;
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .s-earn small {
+      opacity: 0.85;
+      font-size: 0.7rem;
+    }
+
+    .s-earn strong {
+      font-size: 1.5rem;
+    }
+
+    .s-earn span {
+      font-size: 0.7rem;
+      color: #fef3c7;
+    }
+
+    .s-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .s-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      font-size: 0.7rem;
+    }
+
+    .s-card .img {
+      flex: 1;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      min-height: 60px;
+    }
+
+    .img.a {
+      background: linear-gradient(135deg, #fda4af, #fb7185);
+    }
+
+    .img.b {
+      background: linear-gradient(135deg, #93c5fd, #6366f1);
+    }
+
+    .img.c {
+      background: linear-gradient(135deg, #fcd34d, #f59e0b);
+    }
+
+    .img.d {
+      background: linear-gradient(135deg, #86efac, #10b981);
+    }
+
+    .s-card i {
+      font-style: normal;
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    .s-share {
+      background: #22c55e;
+      color: #fff;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    /* Features */
+
+    .features {
+      padding: 32px 0 64px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feat:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .ic {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .feat h3 {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .feat p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Steps */
+
+    .steps {
+      padding: 64px 0;
+      background: #fff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+
+    .sub {
+      text-align: center;
+      color: var(--muted);
+      margin: 6px 0 40px;
+    }
+
+    .step-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .step-list li {
+      background: var(--bg);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .num {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .step-list h3 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .step-list p {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    /* FAQ */
+
+    .faq {
+      padding: 64px 0;
+    }
+
+    .faq h2 {
+      margin-bottom: 28px;
+    }
+
+    details {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    details p {
+      margin-top: 10px;
+      color: var(--muted);
+    }
+
+    /* Footer */
+
+    .footer {
+      padding: 28px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Tablet */
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .lead {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta {
+        justify-content: center;
+      }
+
+      .phone {
+        width: 240px;
+        height: 480px;
+        transform: none;
+      }
+
+      .step-list {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+      .wrap {
+        padding: 0 16px;
+      }
+
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 0.95rem;
+      }
+
+      .logo {
+        width: 32px;
+        height: 32px;
+      }
+
+      .grid-3,
+      .step-list {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-lg {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .meta {
+        text-align: center;
+      }
+
+      .hero {
+        padding: 48px 0 40px;
+      }
+
+      .features,
+      .steps,
+      .faq {
+        padding: 48px 0;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
   <header class="nav">
     <div class="wrap nav-inner">
-      <a href="#" class="brand"><span class="logo">RM</span> Reseller Market</a>
-      <a href="#download" class="btn btn-sm">Get the app</a>
+      <a href="#" class="brand">
+        <span class="logo">RM</span>
+        Reseller Market
+      </a>
+
+      <a href="#download" class="btn btn-sm">
+        Get the app
+      </a>
     </div>
   </header>
 
   <main>
+
     <section class="hero">
       <div class="wrap hero-grid">
+
         <div>
           <span class="pill">Android app • Free</span>
-          <h1>Start your reselling business <em>from your phone.</em></h1>
-          <p class="lead">Reseller Market lets you browse thousands of products, share them with your customers on WhatsApp in one tap, add your own margin and track every order — no investment needed.</p>
+
+          <h1>
+            Start your reselling business
+            <em>from your phone.</em>
+          </h1>
+
+          <p class="lead">
+            Reseller Market lets you browse thousands of products, share them
+            with your customers on WhatsApp in one tap, add your own margin
+            and track every order — no investment needed.
+          </p>
+
           <div class="cta" id="download">
-            <a href="Reseller Market(v.1.3).apk" class="btn btn-lg" download="ResellerMarket.apk" id="apk-btn">
-              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
+
+            <a
+              href="Reseller Market(v.1.3).apk"
+              class="btn btn-lg"
+              download="ResellerMarket.apk"
+              id="apk-btn"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="22"
+                height="22"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"
+                />
+              </svg>
+
               Download APK
             </a>
-            <div class="meta">For Android 7.0 and above</div>
+
+            <div class="meta">
+              For Android 7.0 and above
+            </div>
+
           </div>
-          <p class="note" id="ios-note" hidden>You appear to be on an iPhone. The APK only works on Android phones.</p>
+
+          <p class="note" id="ios-note" hidden>
+            You appear to be on an iPhone. The APK only works on Android
+            phones.
+          </p>
         </div>
-       
+
       </div>
     </section>
 
     <section class="features">
       <div class="wrap grid-3">
-        <div class="feat"><div class="ic">🛍️</div><h3>Thousands of products</h3><p>Fashion, home, electronics and more at wholesale prices.</p></div>
-        <div class="feat"><div class="ic">📲</div><h3>One-tap sharing</h3><p>Send product photos and prices to customers instantly.</p></div>
-        <div class="feat"><div class="ic">💰</div><h3>Earn your margin</h3><p>Set your own price and get paid directly to your Jazzcash or Easypaisa Account.</p></div>
+
+        <div class="feat">
+          <div class="ic">🛍️</div>
+          <h3>Thousands of products</h3>
+          <p>
+            Fashion, home, electronics and more at wholesale prices.
+          </p>
+        </div>
+
+        <div class="feat">
+          <div class="ic">📲</div>
+          <h3>One-tap sharing</h3>
+          <p>
+            Send product photos and prices to customers instantly.
+          </p>
+        </div>
+
+        <div class="feat">
+          <div class="ic">💰</div>
+          <h3>Earn your margin</h3>
+          <p>
+            Set your own price and get paid directly to your Jazzcash or
+            Easypaisa Account.
+          </p>
+        </div>
+
       </div>
     </section>
 
     <section class="steps" id="install">
+
       <div class="wrap">
+
         <h2>How to install on your phone</h2>
-        <p class="sub">Takes less than a minute. Follow these simple steps.</p>
+
+        <p class="sub">
+          Takes less than a minute. Follow these simple steps.
+        </p>
+
         <ol class="step-list">
-          <li><span class="num">1</span><div><h3>Download the APK</h3><p>Tap <b>Download APK</b> above. If your browser warns you about the file, tap <b>Download anyway</b>.</p></div></li>
-          <li><span class="num">2</span><div><h3>Open the file</h3><p>Open the notification when the download finishes, or find <b>ResellerMarket.apk</b> in your <b>Files → Downloads</b> folder.</p></div></li>
-          <li><span class="num">3</span><div><h3>Allow installation</h3><p>If asked, tap <b>Settings</b> and turn on <b>Allow from this source</b> for your browser or Files app, then go back.</p></div></li>
-          <li><span class="num">4</span><div><h3>Install &amp; open</h3><p>Tap <b>Install</b>, wait a few seconds, then tap <b>Open</b>. Sign up and start reselling!</p></div></li>
+
+          <li>
+            <span class="num">1</span>
+
+            <div>
+              <h3>Download the APK</h3>
+
+              <p>
+                Tap <b>Download APK</b> above. If your browser warns you
+                about the file, tap <b>Download anyway</b>.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <span class="num">2</span>
+
+            <div>
+              <h3>Open the file</h3>
+
+              <p>
+                Open the notification when the download finishes, or find
+                <b>ResellerMarket.apk</b> in your
+                <b>Files → Downloads</b> folder.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <span class="num">3</span>
+
+            <div>
+              <h3>Allow installation</h3>
+
+              <p>
+                If asked, tap <b>Settings</b> and turn on
+                <b>Allow from this source</b> for your browser or Files app,
+                then go back.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <span class="num">4</span>
+
+            <div>
+              <h3>Install &amp; open</h3>
+
+              <p>
+                Tap <b>Install</b>, wait a few seconds, then tap
+                <b>Open</b>. Sign up and start reselling!
+              </p>
+            </div>
+          </li>
+
         </ol>
+
       </div>
     </section>
 
     <section class="faq">
+
       <div class="wrap narrow">
+
         <h2>Questions</h2>
-        <details><summary>Is it safe to install the APK?</summary><p>Yes. This is the official Reseller Market app, downloaded directly from our website. Android shows a warning for every app installed outside the Play Store — this is normal.</p></details>
-        <details><summary>Does it work on iPhone?</summary><p>No, APK files only work on Android phones and tablets.</p></details>
-        <details><summary>How do I update the app?</summary><p>Download the latest APK from this page and install it over the existing app. Your account and data stay the same.</p></details>
-        <details><summary>It says "App not installed". What do I do?</summary><p>Make sure you have enough free storage, then uninstall any older copy of the app and try installing again.</p></details>
+
+        <details>
+          <summary>Is it safe to install the APK?</summary>
+
+          <p>
+            Yes. This is the official Reseller Market app, downloaded
+            directly from our website. Android shows a warning for every
+            app installed outside the Play Store — this is normal.
+          </p>
+        </details>
+
+        <details>
+          <summary>Does it work on iPhone?</summary>
+
+          <p>
+            No, APK files only work on Android phones and tablets.
+          </p>
+        </details>
+
+        <details>
+          <summary>How do I update the app?</summary>
+
+          <p>
+            Download the latest APK from this page and install it over the
+            existing app. Your account and data stay the same.
+          </p>
+        </details>
+
+        <details>
+          <summary>It says "App not installed". What do I do?</summary>
+
+          <p>
+            Make sure you have enough free storage, then uninstall any older
+            copy of the app and try installing again.
+          </p>
+        </details>
+
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
-    <div class="wrap">© <span id="year"></span> Reseller Market. All rights reserved.</div>
+    <div class="wrap">
+      © <span id="year"></span> Reseller Market. All rights reserved.
+    </div>
   </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
     if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      document.getElementById('ios-note').hidden = false;
+      document.getElementById("ios-note").hidden = false;
     }
   </script>
+
 </body>
 </html>
